@@ -5,6 +5,8 @@ import path from "path";
 import "dotenv/config";
 import authRoutes from "./routes/auth"
 
+console.log(process.env.MONGODB_CONNECTION_STRING);
+
 mongoose
     .connect(process.env.MONGODB_CONNECTION_STRING as string)
     .then(() => {

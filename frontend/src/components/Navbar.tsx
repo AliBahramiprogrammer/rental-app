@@ -14,11 +14,12 @@ const Navbar = () => {
     const dispatch = useDispatch();
 
     const navigate = useNavigate();
+    console.log(user.profileImagePath)
 
     return (
         <div className="navbar">
             <Link to="/" className="logo">
-                <img src="../assets/logo.png" alt="logo" />
+                <img src="assets/logo.png" alt="logo" />
             </Link>
 
             <div
@@ -66,7 +67,7 @@ const Navbar = () => {
                         <Person sx={{ color: "#969393" }} />
                     ) : (
                         <img
-                            src={`http://localhost:7000/${user.profileImagePath.replace(
+                            src={`${user.profileImagePath.replace(
                                 "public",
                                 ""
                             )}`}

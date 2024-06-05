@@ -3,13 +3,13 @@ import express , {Request , Response} from "express";
 import multer from "multer";
 import User from "../models/User";
 import jwt from "jsonwebtoken"
-import path from "path";
+import path, { dirname } from "path";
 
 const router = express.Router();
 
 const storage = multer.diskStorage({
     destination: (req, file, cb) => {
-        cb(null, path.join(__dirname, "../../frontend/dist/public/uploads/"));
+        cb(null, path.join(__dirname, "../../../frontend/dist/uploads/"));
     },
     filename: (req, file, cb) => {
         cb(null, file.originalname);
@@ -32,7 +32,7 @@ router.post("/register", upload.single("profileImage"), async (req:Request, res:
         }
 
         // path to the profile image
-        const profileImagePath = profileImage.path;
+        const profileImagePath = `uploads/${profileImage.filename}`;
         console.log(profileImagePath);
 
         // Check if the user exists
