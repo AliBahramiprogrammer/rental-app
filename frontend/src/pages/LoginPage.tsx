@@ -24,11 +24,6 @@ const LoginPage = () => {
     const mutate = useMutation({
         mutationFn: apiClent.login,
         onSuccess: (data) => {
-            toast.success("Login successfully", {
-                style: {
-                    border: '1px solid green'
-                }
-            })
             dispatch(userActions.login({
                 user: data.user,
                 token: data.token,
@@ -36,13 +31,21 @@ const LoginPage = () => {
             navigate("/");
         },
         onError: (error: Error) => {
-            toast.error(error.message);
             console.log(error);
         },
     });
 
     const onSubmit = handleSubmit((data) => {
-        mutate.mutate(data);
+
+        toast.promise(
+            mutate.mutateAsync(data),
+             {
+               loading: 'Saving...',
+               success: <b>Register Successfully.</b>,
+               error: <b>Register failed</b>,
+             }
+           );
+
     });
 
     return (

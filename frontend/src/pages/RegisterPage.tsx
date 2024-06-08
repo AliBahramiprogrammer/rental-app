@@ -24,22 +24,15 @@ const RegisterPage = () => {
         formState: { errors },
     } = useForm<RegisterFormData>();
 
-    const mutation = useMutation({
+    const {mutateAsync} = useMutation({
         mutationFn: apiClent.register,
         onSuccess: () => {
-            toast.success("Register successfully", {
-                style: {
-                    border: '1px solid green'
-                }
-            })
             navigate("/login");
-        },
-        onError: (error: Error) => {
-            toast.error(error.message)
-        },
+        }, onError: (error: Error) => {
+            console.log(error)
+        }
     });
     const onSubmit = handleSubmit((data: RegisterFormData) => {
-        console.log(data)
         const formData = new FormData();
 
         formData.append("firstName", data.firstName);
@@ -50,7 +43,14 @@ const RegisterPage = () => {
         Array.from(data.profileImage).forEach((profile) => {
             formData.append(`profileImage`, profile);
         })
-        mutation.mutate(formData);
+        toast.promise(
+            mutateAsync(formData),
+             {
+               loading: 'Saving...',
+               success: <b>Register Successfully.</b>,
+               error: <b>Register failed</b>,
+             }
+           );
     });
 
     return (
@@ -137,7 +137,7 @@ const RegisterPage = () => {
                                 validate: (profileImage) => {
                                     const totalLength = profileImage?.length || 0;
                                     if (totalLength === 0) {
-                                        return "One image should be added";
+                                        return "The image should be added";
                                     }
                                 }
                             })}
@@ -147,9 +147,9 @@ const RegisterPage = () => {
                             alt="add profile photo"
                         />
                         <p>Upload Your Photo</p>
-                        {/* {errors.profileImage && (
+                        {errors.profileImage && (
                             <span>{errors.profileImage.message}</span>
-                        )} */}
+                        )}
                     </label>
                     {watch("profileImage") && watch("profileImage")!?.length &&  (
                         <img

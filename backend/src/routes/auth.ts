@@ -7,6 +7,7 @@ import path, { dirname } from "path";
 
 const router = express.Router();
 
+/* Configuration Multer for File Upload */
 const storage = multer.diskStorage({
     destination: (req, file, cb) => {
         cb(null, path.join(__dirname, "../../../frontend/dist/uploads/"));

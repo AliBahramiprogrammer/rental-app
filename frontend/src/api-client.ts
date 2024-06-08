@@ -29,3 +29,15 @@ export const login = async (formData: LoginFormData) => {
         throw new Error(error.response.data.message || error.message);
     }
 }
+
+export const addMyListing = async (formData: FormData) => {
+    try {
+        const response = await axios.post(`${API_BASE_URL}/api/properties/create`, formData);
+        if (!response.data) {
+            throw new Error("No data returned from server");
+        }
+        return response.data;
+    } catch (error:any) {
+        throw new Error(error.response.data.message || error.message);
+    }
+}

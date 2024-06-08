@@ -14,7 +14,6 @@ const Navbar = () => {
     const dispatch = useDispatch();
 
     const navigate = useNavigate();
-    console.log(user.profileImagePath)
 
     return (
         <div className="navbar">
@@ -48,7 +47,7 @@ const Navbar = () => {
 
             <div className="navbar_right">
                 {user ? (
-                    <Link to="/login" className="host">
+                    <Link to="/create-listing" className="host">
                         Become A Host
                     </Link>
                 ) : (
@@ -67,10 +66,7 @@ const Navbar = () => {
                         <Person sx={{ color: "#969393" }} />
                     ) : (
                         <img
-                            src={`${user.profileImagePath.replace(
-                                "public",
-                                ""
-                            )}`}
+                            src={`${user.profileImagePath}`}
                             alt="profile photo"
                             style={{ objectFit: "cover", borderRadius: "50%" }}
                         />
