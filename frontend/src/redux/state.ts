@@ -1,8 +1,16 @@
 import { createSlice } from "@reduxjs/toolkit";
+import { userType } from "../../../backend/src/shared/types";
 
-const initialState = {
+type StateType =  {
+    user: userType | null;
+    token: null | string;
+    listings: null | string[];
+  }
+
+const initialState: StateType = {
     user: null,
-    token : null,
+    token: null,
+    listings: null,
 }
 
 const userSlice = createSlice({
@@ -16,6 +24,14 @@ const userSlice = createSlice({
         logout: (state) => {
             state.user = null;
             state.token = null;
+        },
+        setListings: (state, action) => {
+            state.listings = action.payload.listings
+        },
+        setWishList: (state, action) => {
+            if (state.user) {
+                state.user.wishList = action.payload.wishList;
+              }
         }
     }
 })

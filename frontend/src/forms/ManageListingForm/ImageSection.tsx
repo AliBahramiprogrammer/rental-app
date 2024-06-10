@@ -8,7 +8,6 @@ import {
 } from "react-beautiful-dnd";
 import { BiTrash } from "react-icons/bi";
 import { IoIosImages } from "react-icons/io";
-import { useState } from "react";
 const ImageSection = () => {
     const {
         register,

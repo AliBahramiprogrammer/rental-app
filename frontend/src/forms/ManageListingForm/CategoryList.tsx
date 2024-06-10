@@ -10,8 +10,7 @@ const CategoryList = () => {
     } = useFormContext<PlaceFormData>();
 
     
-    const categoriesSelected = watch("categories") || [];
-    console.log(categoriesSelected)
+    const categoriesSelected = watch("category") || "";
 
     return (
         <>
@@ -20,25 +19,19 @@ const CategoryList = () => {
                 {placeCategories.map((category, index) => (
                     <label className={`category ${categoriesSelected.includes(category.label) && "selected"}`} key={index}>
                         <input
-                            type="checkbox"
+                            type="radio"
                             value={category.label}
-                            {...register("categories", {
-                                validate: (categories) => {
-                                    if (categories && categories.length > 0) {
-                                        return true;
-                                    } else {
-                                        return "At least one category is required";
-                                    }
-                                },
+                            {...register("category", {
+                                required: "This field is required"
                             })}
                         />
                         <div className="category_icon">{category.icon}</div>
                         <p>{category.label}</p>
                     </label>
                 ))}
-                {errors.categories && (
+                {errors.category && (
                     <span>
-                        {errors.categories.message}
+                        {errors.category.message}
                     </span>
                 )}
             </div>

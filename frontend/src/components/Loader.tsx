@@ -1,8 +1,11 @@
+import "../styles/Loader.scss"
 
 const Loader = () => {
   return (
-    <div>Loader</div>
+    <div className='loader'>
+      <div className='loader-inner'></div>
+    </div>
   )
 }
 
-export default Loader;
+export default Loader

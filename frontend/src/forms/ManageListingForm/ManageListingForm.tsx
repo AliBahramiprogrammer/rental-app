@@ -5,7 +5,7 @@ import { useSelector } from "react-redux";
 
 export type PlaceFormData = {
     creator: string;
-    categories: string[];
+    category: string;
     type: string;
     streetAddress: string;
     aptSuite: string;
@@ -50,6 +50,7 @@ const ManageListingForm = ({onSave , isLoading}: Props) => {
 
         formData.append("creator", creatorId);
         formData.append("type", formDataJson.type);
+        formData.append("category", formDataJson.category);
         formData.append("city", formDataJson.city);
         formData.append("country", formDataJson.country);
         formData.append("province", formDataJson.province);
@@ -65,9 +66,6 @@ const ManageListingForm = ({onSave , isLoading}: Props) => {
         formData.append("bedroomCount", formDataJson.bedroomCount.toString());
         formData.append("bathroomCount", formDataJson.bathroomCount.toString());
 
-        formDataJson.categories.forEach((category, index) => {
-            formData.append(`category[${index}]`, category);
-        });
 
         formDataJson.amenities.forEach((amenity, index) => {
             formData.append(`amenity[${index}]`, amenity);
