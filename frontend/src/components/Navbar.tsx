@@ -6,6 +6,7 @@ import "../styles/Navbar.scss";
 import { useDispatch, useSelector } from "react-redux";
 import { userActions } from "../redux/state";
 
+
 const Navbar = () => {
     const [search, setSearch] = useState("");
     const [dropdownMenu, setDropdownMenu] = useState(false);
@@ -18,7 +19,7 @@ const Navbar = () => {
     return (
         <div className="navbar">
             <Link to="/" className="logo">
-                <img src="assets/logo.png" alt="logo" />
+                <img src={`/assets/logo.png`} alt="logo" />
             </Link>
 
             <div
@@ -74,7 +75,7 @@ const Navbar = () => {
                 </button>
 
                 {dropdownMenu && !user && (
-                    <div className="navbar_right_accountmenu" >
+                    <div className="navbar_right_accountmenu">
                         <Link to="/login">
                             Log In
                             <Login />
@@ -87,7 +88,7 @@ const Navbar = () => {
                 )}
 
                 {dropdownMenu && user && (
-                    <div className="navbar_right_accountmenu" >
+                    <div className="navbar_right_accountmenu">
                         <Link to={`${user._id}/trips`}>Trip List</Link>
                         <Link to={`${user._id}/wishList`}>Wish List</Link>
                         <Link to={`${user._id}/properties`}>Property List</Link>

@@ -4,9 +4,10 @@ import { LoginFormData } from "./pages/LoginPage";
 const API_BASE_URL = import.meta.env.VITE_API_BASE_URL || "";
 
 type typeParams = {
-    userId: string,
-    listingId: string,
-}
+    userId: string;
+    listingId: string;
+};
+
 
 export const register = async (formData: FormData) => {
     try {
@@ -73,7 +74,7 @@ export const getListingByCategory = async (category: string) => {
     }
 };
 
-export const patchWishList = async ({ userId, listingId }:typeParams) => {
+export const patchWishList = async ({ userId, listingId }: typeParams) => {
     try {
         const response = await axios.patch(
             `${API_BASE_URL}/api/users/${userId}/${listingId}`,
@@ -86,6 +87,36 @@ export const patchWishList = async ({ userId, listingId }:typeParams) => {
         }
         return response.data;
     } catch (error: any) {
+        throw new Error(error.response.data.message || error.message);
+    }
+};
+
+export const fetchListingById = async (listingId: string) => {
+    try {
+        const response = await axios.get(
+            `${API_BASE_URL}/api/properties/${listingId}`
+        );
+        if (!response.data) {
+            throw new Error("No data returned from server");
+        }
+        return response.data;
+    } catch (error: any) {
+        throw new Error(error.response.data.message || error.message);
+    }
+};
+
+export const createBooking = async (bookingInfo: FormData) => {
+    try {
+        const respose = await axios.post(`${API_BASE_URL}/api/bookings/create`, bookingInfo , {
+            headers: {
+                "Content-Type": "application/json",
+            },
+        })
+        if (!respose.data) {
+            throw new Error("No data returned from server");
+        }
+        return respose.data;
+    } catch (error : any) {
         throw new Error(error.response.data.message || error.message);
     }
 };

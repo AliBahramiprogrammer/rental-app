@@ -1,20 +1,20 @@
 export type userType = {
-    _id: string,
-    firstName: string
-    lastName: string,
-    email: string,
-    password?: string,
-    profileImagePath: string,
-    tripList?: string[],
-    wishList?: listingType[],
-    propertyList?: string[],
-    reservationList?: string[],
-    createdAt: Date,
-    updatedAt: Date,
-}
+    _id: string;
+    firstName: string;
+    lastName: string;
+    email: string;
+    password?: string;
+    profileImagePath: string;
+    tripList?: string[];
+    wishList?: listingType[];
+    propertyList?: string[];
+    reservationList?: string[];
+    createdAt: Date;
+    updatedAt: Date;
+};
 
 export type listingType = {
-    _id: string,
+    _id: string;
     creator: userType | string;
     category: string;
     type: string;
@@ -34,4 +34,17 @@ export type listingType = {
     highlight: string;
     highlightDesc: string;
     price: number;
-}
+    createdAt: Date;
+    updatedAt: Date;
+};
+
+export type bookingType = {
+    customerId: userType | string;
+    hostId: userType | string;
+    listingId: listingType | string;
+    startDate: string;
+    endDate: string;
+    totalPrice: number;
+    createdAt: Date;
+    updatedAt: Date;
+};
