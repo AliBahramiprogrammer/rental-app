@@ -1,4 +1,5 @@
 import mongoose from "mongoose";
+import { listingType } from "../shared/types";
 
 const ListingSchema = new mongoose.Schema(
     {
@@ -7,7 +8,7 @@ const ListingSchema = new mongoose.Schema(
             ref: "User"
         },
         category: {
-            type: Array,
+            type: String,
             required: true,
           },
           type: {
@@ -79,5 +80,5 @@ const ListingSchema = new mongoose.Schema(
     { timestamps : true}
 )
 
-const Listing = mongoose.model("Listing", ListingSchema);
+const Listing = mongoose.model<listingType>("Listing", ListingSchema);
 export default Listing;

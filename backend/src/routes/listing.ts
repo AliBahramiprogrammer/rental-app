@@ -38,6 +38,25 @@ async (req: Request, res: Response) => {
 }
 )
 
+/* GET lISTINGS BY CATEGORY */
+router.get("/", async (req:Request, res:Response) => {
+    const qCategory = req.query.category
+  
+    try {
+      let listings
+      if (qCategory) {
+        listings = await Listing.find({ category: qCategory }).populate("creator")
+      } else {
+        listings = await Listing.find().populate("creator")
+      }
+  
+      res.status(200).json(listings)
+    } catch (err:any) {
+      res.status(404).json({ message: "Fail to fetch listings", error: err?.message })
+      console.log(err)
+    }
+  })
+
 
 async function uploadImages(imageFiles: Express.Multer.File[]) {
     const uploadPromises = imageFiles.map(async (image) => {

@@ -5,6 +5,7 @@ import path from "path";
 import "dotenv/config";
 import authRoutes from "./routes/auth"
 import listingRoutes from "./routes/listing";
+import userRoutes from "./routes/user"
 import { v2 as cloudinary } from "cloudinary";
 
 console.log(process.env.MONGODB_CONNECTION_STRING);
@@ -36,7 +37,8 @@ app.use(
 );
 
 app.use("/api/auth" , authRoutes)
-app.use("/api/properties" , listingRoutes)
+app.use("/api/properties", listingRoutes)
+app.use("/api/users", userRoutes)
 
 
 app.listen(7000, () => {
