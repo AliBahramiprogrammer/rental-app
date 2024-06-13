@@ -32,6 +32,16 @@ const userSlice = createSlice({
             if (state.user) {
                 state.user.wishList = action.payload.wishList;
               }
+        },
+        setTripList: (state, action) => { 
+            if (state.user) {
+                state.user.tripList = action.payload.tripList;
+              }
+        },
+        setPropertyList: (state, action) => {
+            if (state.user) {
+                state.user.propertyList = action.payload.propertyList;
+              }
         }
     }
 })

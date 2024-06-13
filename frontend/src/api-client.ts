@@ -8,7 +8,6 @@ type typeParams = {
     listingId: string;
 };
 
-
 export const register = async (formData: FormData) => {
     try {
         const response = await axios.post(
@@ -107,16 +106,63 @@ export const fetchListingById = async (listingId: string) => {
 
 export const createBooking = async (bookingInfo: FormData) => {
     try {
-        const respose = await axios.post(`${API_BASE_URL}/api/bookings/create`, bookingInfo , {
-            headers: {
-                "Content-Type": "application/json",
-            },
-        })
+        const respose = await axios.post(
+            `${API_BASE_URL}/api/bookings/create`,
+            bookingInfo,
+            {
+                headers: {
+                    "Content-Type": "application/json",
+                },
+            }
+        );
         if (!respose.data) {
             throw new Error("No data returned from server");
         }
         return respose.data;
-    } catch (error : any) {
+    } catch (error: any) {
+        throw new Error(error.response.data.message || error.message);
+    }
+};
+
+export const fetchBookingsById = async (userId: string) => {
+    try {
+        const response = await axios.get(
+            `${API_BASE_URL}/api/users/${userId}/trips`
+        );
+        if (!response.data) {
+            throw new Error("No data returned from server");
+        }
+        return response.data;
+    } catch (error: any) {
+        throw new Error(error.response.data.message || error.message);
+    }
+};
+
+export const fetchPropertiesList = async (userId: string) => {
+    try {
+        const response = await axios.get(
+            `${API_BASE_URL}/api/users/${userId}/properties`
+        );
+        if (!response.data) {
+            throw new Error("No data returned from server");
+        }
+        return response.data;
+    } catch (error: any) {
+        throw new Error(error.response.data.message || error.message);
+    }
+};
+
+export const fetchListingBySearch = async (search: string) => {
+    try {
+        const response = await axios.get(
+            `${API_BASE_URL}/api/properties/search/${search}`
+        );
+
+        if (!response.data) {
+            throw new Error("No data returned from server");
+        }
+        return response.data;
+    } catch (error: any) {
         throw new Error(error.response.data.message || error.message);
     }
 };

@@ -17,12 +17,13 @@ type Props = {
     province: string;
     country: string;
     category: string;
-    type: string;
-    price: number;
+    type?: string;
+    price?: number;
     startDate?: Date;
     endDate?: Date;
     totalPrice?: number;
     booking: boolean;
+    key?: string;
 };
 
 const ListingCard = ({
@@ -36,6 +37,8 @@ const ListingCard = ({
     type,
     price,
     booking,
+    startDate,
+    endDate,
     totalPrice,
 }: Props) => {
     const [currentIndex, setCurrentIndex] = useState(0);
@@ -61,7 +64,6 @@ const ListingCard = ({
     })
 
     const patchWishList = () => {
-        console.log(1111)
         if (user?._id !== creator._id) {
             mutate.mutate({userId: user._id , listingId })
         }
@@ -133,7 +135,7 @@ const ListingCard = ({
                 </>
             ) : (
                 <>
-                    <p>{/* {startDate} - {endDate} */}</p>
+                    <p>{startDate?.toString()} - {endDate?.toString()}</p>
                     <p>
                         <span>${totalPrice}</span> total
                     </p>

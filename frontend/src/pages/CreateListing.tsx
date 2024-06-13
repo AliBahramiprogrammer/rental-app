@@ -5,6 +5,7 @@ import * as apiClient from "../api-client"
 import "../styles/CreateListing.scss";
 import { useNavigate } from "react-router-dom";
 import toast from "react-hot-toast";
+import Footer from "../components/Footer";
 
 const CreateListing = () => {
 
@@ -44,6 +45,7 @@ const CreateListing = () => {
         <h1>Publish Your Place</h1>
         <ManageListingForm onSave={handleSave} isLoading={isPending} />
       </div>
+      <Footer/>
     </>
   )
 }

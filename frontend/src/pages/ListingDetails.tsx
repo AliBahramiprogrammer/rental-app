@@ -12,6 +12,7 @@ import { useState } from "react";
 import { useSelector } from "react-redux";
 import { useNavigate } from "react-router-dom";
 import toast from "react-hot-toast";
+import Footer from "../components/Footer";
 
 const ListingDetails = () => {
     const { listingId } = useParams();
@@ -174,6 +175,7 @@ const ListingDetails = () => {
                     </div>
                 </div>
             </div>
+            <Footer />
         </>
     );
 };
