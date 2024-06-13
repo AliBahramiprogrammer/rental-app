@@ -1,5 +1,5 @@
 import "../styles/Footer.scss";
-import { LinkedIn, GitHub, Email } from "@mui/icons-material";
+import {  GitHub, Email } from "@mui/icons-material";
 const Footer = () => {
     return (
         <div className="footer">
