@@ -1,0 +1,18 @@
+.card-skeleton {
+    box-shadow: 0 5px 10px 0 rgba(#000, 0.15);
+    border-radius: 10px;
+    margin: 1rem;
+
+    .card-slider {
+        padding-bottom: 56.25%;
+        position: relative;
+    }
+
+    .card-body {
+        padding: 1.5rem;
+        .text-container {
+            margin-top: 0.75rem;
+
+        }
+    }
+}

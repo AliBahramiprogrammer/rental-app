@@ -1,5 +1,4 @@
 import Navbar from "../components/Navbar";
-import Loader from "../components/Loader";
 import "../styles/List.scss";
 import { useParams } from "react-router-dom";
 import { useDispatch, useSelector } from "react-redux";
@@ -12,6 +11,7 @@ import {
     userType,
 } from "../../../backend/src/shared/types";
 import Footer from "../components/Footer";
+import ListingCardSkeleton from "../components/ListingCardSkaleton";
 
 export type tripType = {
     listingId: listingType;
@@ -35,37 +35,38 @@ const TripList = () => {
 
     dispatch(userActions.setTripList({ tripList: data }));
 
-    return isLoading ? (
-        <Loader />
-    ) : (
+    return (
         <>
             <Navbar />
             <h1 className="title-list">Your Trip List</h1>
-            <div className="list">
-                {tripList?.map(
-                    ({
-                        listingId,
-                        hostId,
-                        startDate,
-                        endDate,
-                        totalPrice,
-                        booking = true,
-                    }: tripType) => (
-                        <ListingCard
-                            listingId={listingId._id}
-                            creator={hostId}
-                            listingPhotoUrls={listingId.listingPhotoUrls}
-                            city={listingId.city}
-                            province={listingId.province}
-                            country={listingId.country}
-                            category={listingId.category}
-                            startDate={startDate}
-                            endDate={endDate}
-                            totalPrice={totalPrice}
-                            booking={booking}
-                        />
-                    )
-                )}
+                <div className="list">
+                {isLoading ? (
+                    <ListingCardSkeleton cards={3} />
+                ) : (
+                    tripList?.map(
+                        ({
+                            listingId,
+                            hostId,
+                            startDate,
+                            endDate,
+                            totalPrice,
+                            booking = true,
+                        }: tripType) => (
+                            <ListingCard
+                                listingId={listingId._id}
+                                creator={hostId}
+                                listingPhotoUrls={listingId.listingPhotoUrls}
+                                city={listingId.city}
+                                province={listingId.province}
+                                country={listingId.country}
+                                category={listingId.category}
+                                startDate={startDate}
+                                endDate={endDate}
+                                totalPrice={totalPrice}
+                                booking={booking}
+                            />
+                        )
+                    ))}
                 </div>
                 <Footer/>
         </>
