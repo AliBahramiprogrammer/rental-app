@@ -152,6 +152,20 @@ export const fetchPropertiesList = async (userId: string) => {
     }
 };
 
+export const fetchReservationList = async (userId: string) => {
+    try {
+        const response = await axios.get(
+            `${API_BASE_URL}/api/users/${userId}/reservations`
+        );
+        if (!response.data) {
+            throw new Error("No data returned from server");
+        }
+        return response.data;
+    } catch (error: any) {
+        throw new Error(error.response.data.message || error.message);
+    }
+};
+
 export const fetchListingBySearch = async (search: string) => {
     try {
         const response = await axios.get(

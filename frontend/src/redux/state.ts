@@ -42,6 +42,11 @@ const userSlice = createSlice({
             if (state.user) {
                 state.user.propertyList = action.payload.propertyList;
               }
+        },
+        setReservationList: (state, action) => {
+            if (state.user) {
+                state.user.reservationList = action.payload.reservationList;
+              }
         }
     }
 })

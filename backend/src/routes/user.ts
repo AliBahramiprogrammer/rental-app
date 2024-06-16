@@ -75,4 +75,22 @@ router.get("/:userId/properties", async (req: Request, res: Response) => {
     }
 })
 
+router.get("/:userId/reservations", async (req: Request, res: Response) => {
+    try {
+        const { userId } = req.params;
+        const reservations = await Booking.find({ hostId: userId }).populate(
+            "customerId hostId listingId"
+        );
+        if (!reservations) {
+            res.status(404).send({ message: "There are no reservations!!" });
+        }
+        res.status(202).send(reservations);
+    } catch (error: any) {
+        res.status(404).json({
+            message: "Can not find reservations!",
+            error: error.message,
+        });
+    }
+})
+
 export default router;

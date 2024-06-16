@@ -286,11 +286,20 @@
                 transition: 0.2s ease;
                 text-align: center;
 
+                &:hover {
+                    border: 2px solid $pinkred;
+                    background-color: $lightgrey;
+                }
+
                 @include ml {
                     width: 250px;
                 }
                 @include md {
                     width: 100%;
+
+                    &:hover {
+                        border: 1px solid $grey;
+                    }
                 }
 
                 input {
@@ -304,15 +313,10 @@
                 p {
                     font-weight: 600;
                 }
-
-                &:hover {
-                    border: 2px solid $pinkred;
-                    background-color: $lightgrey;
-                }
             }
 
             .selected {
-                border: 2px solid $pinkred;
+                border: 2px solid $pinkred !important;
                 background-color: $lightgrey;
             }
         }
@@ -491,8 +495,6 @@
             &:hover {
                 box-shadow: none;
             }
-
         }
-       
     }
 }
